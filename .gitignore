@@ -1,0 +1,16 @@
+node_modules/
+.next/
+dist/
+coverage/
+*.tsbuildinfo
+.env
+.env.local
+*.db
+*.db-journal
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+model-service/.coverage
+.next-*.log
+model-service-api*.log

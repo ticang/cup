@@ -1,0 +1,214 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Competition {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  region      String?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  seasons     Season[]
+}
+
+model Season {
+  id            String      @id @default(cuid())
+  competitionId String
+  name          String
+  startsOn      DateTime?
+  endsOn        DateTime?
+  competition   Competition @relation(fields: [competitionId], references: [id], onDelete: Cascade)
+  fixtures      Fixture[]
+
+  @@unique([competitionId, name])
+}
+
+model Team {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  country   String?
+  rating    Float    @default(1500)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  homeFixtures Fixture[] @relation("HomeTeam")
+  awayFixtures Fixture[] @relation("AwayTeam")
+}
+
+model Fixture {
+  id             String    @id @default(cuid())
+  seasonId       String
+  homeTeamId     String
+  awayTeamId     String
+  kickoffAt      DateTime
+  neutralVenue   Boolean   @default(false)
+  status         String    @default("scheduled")
+  venue          String?
+  season         Season    @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  homeTeam       Team      @relation("HomeTeam", fields: [homeTeamId], references: [id])
+  awayTeam       Team      @relation("AwayTeam", fields: [awayTeamId], references: [id])
+  result         MatchResult?
+  oddsSnapshots  OddsSnapshot[]
+  predictions    Prediction[]
+
+  @@index([seasonId, kickoffAt])
+  @@index([homeTeamId])
+  @@index([awayTeamId])
+}
+
+model MatchResult {
+  id           String   @id @default(cuid())
+  fixtureId    String   @unique
+  homeGoals    Int
+  awayGoals    Int
+  recordedAt   DateTime @default(now())
+  fixture      Fixture  @relation(fields: [fixtureId], references: [id], onDelete: Cascade)
+}
+
+model OddsProvider {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  snapshots OddsSnapshot[]
+}
+
+model OddsSnapshot {
+  id          String       @id @default(cuid())
+  fixtureId   String
+  providerId  String
+  capturedAt  DateTime     @default(now())
+  homeOdds    Float
+  drawOdds    Float
+  awayOdds    Float
+  fixture     Fixture      @relation(fields: [fixtureId], references: [id], onDelete: Cascade)
+  provider    OddsProvider @relation(fields: [providerId], references: [id])
+
+  @@index([fixtureId, capturedAt])
+  @@index([providerId])
+}
+
+model ModelVersion {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  name        String
+  status      String       @default("active")
+  description String?
+  configJson  String
+  createdAt   DateTime     @default(now())
+  predictions Prediction[]
+  backtests   BacktestRun[]
+  promotedExperiments TrainingExperiment[] @relation("PromotedModelVersion")
+}
+
+model Prediction {
+  id              String             @id @default(cuid())
+  fixtureId       String
+  modelVersionId  String
+  createdAt       DateTime           @default(now())
+  predictedHome   Int
+  predictedAway   Int
+  homeWinProb     Float
+  drawProb        Float
+  awayWinProb     Float
+  over25Prob      Float
+  confidence      Float
+  explanation     String
+  inputSnapshot   String
+  fixture         Fixture            @relation(fields: [fixtureId], references: [id], onDelete: Cascade)
+  modelVersion    ModelVersion       @relation(fields: [modelVersionId], references: [id])
+  scoreProbabilities ScoreProbability[]
+
+  @@index([fixtureId, createdAt])
+  @@index([modelVersionId])
+}
+
+model ScoreProbability {
+  id           String     @id @default(cuid())
+  predictionId String
+  homeGoals    Int
+  awayGoals    Int
+  probability  Float
+  prediction   Prediction @relation(fields: [predictionId], references: [id], onDelete: Cascade)
+
+  @@unique([predictionId, homeGoals, awayGoals])
+}
+
+model BacktestRun {
+  id             String           @id @default(cuid())
+  modelVersionId String
+  name           String
+  startedAt      DateTime         @default(now())
+  completedAt    DateTime?
+  status         String           @default("completed")
+  dataWindow     String
+  modelVersion   ModelVersion     @relation(fields: [modelVersionId], references: [id])
+  metrics        BacktestMetric[]
+}
+
+model BacktestMetric {
+  id            String      @id @default(cuid())
+  backtestRunId String
+  name          String
+  value         Float
+  segment       String?
+  backtestRun   BacktestRun @relation(fields: [backtestRunId], references: [id], onDelete: Cascade)
+
+  @@index([backtestRunId])
+}
+
+model ImportJob {
+  id           String   @id @default(cuid())
+  entity       String
+  status       String
+  totalRows    Int      @default(0)
+  successRows  Int      @default(0)
+  errorRows    Int      @default(0)
+  errorJson    String   @default("[]")
+  createdAt    DateTime @default(now())
+}
+
+model LlmSettings {
+  id        String   @id @default("default")
+  provider  String   @default("openai-compatible")
+  baseUrl   String
+  appKey    String?
+  modelId   String
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TrainingExperiment {
+  id                     String                     @id @default(cuid())
+  name                   String
+  status                 String                     @default("completed")
+  featureSetJson         String
+  parameterJson          String
+  dataWindow             String
+  artifactPath           String?
+  createdAt              DateTime                   @default(now())
+  completedAt            DateTime?
+  promotedModelVersionId String?
+  promotedModelVersion   ModelVersion?              @relation("PromotedModelVersion", fields: [promotedModelVersionId], references: [id])
+  metrics                TrainingExperimentMetric[]
+}
+
+model TrainingExperimentMetric {
+  id           String             @id @default(cuid())
+  experimentId String
+  name         String
+  value        Float
+  segment      String?
+  experiment   TrainingExperiment @relation(fields: [experimentId], references: [id], onDelete: Cascade)
+
+  @@index([experimentId])
+}
