@@ -1,0 +1,163 @@
+
+> football-ai-prediction-platform@0.1.0 dev
+> next dev --port 3000
+
+   ▲ Next.js 15.5.19
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.140.1:3000
+
+ ✓ Starting...
+ ✓ Ready in 3.6s
+ ○ Compiling /admin/llm-settings ...
+ ✓ Compiled /admin/llm-settings in 1240ms (592 modules)
+ GET /admin/llm-settings 200 in 1786ms
+ ✓ Compiled /admin in 281ms (594 modules)
+ GET /admin 200 in 574ms
+ GET /admin/llm-settings 200 in 96ms
+ ○ Compiling /admin/experiments ...
+ ✓ Compiled /admin/experiments in 539ms (596 modules)
+ GET /admin/experiments 200 in 999ms
+ GET /admin/llm-settings 200 in 102ms
+ ✓ Compiled /api/admin/llm-settings in 385ms (611 modules)
+ POST /api/admin/llm-settings 303 in 537ms
+ GET /admin/llm-settings?saved=1 200 in 180ms
+ POST /api/admin/llm-settings 303 in 40ms
+ GET /admin/llm-settings?saved=1 200 in 84ms
+ POST /api/admin/llm-settings 303 in 43ms
+ GET /admin/llm-settings?saved=1 200 in 70ms
+ ○ Compiling /competitions ...
+ ✓ Compiled /competitions in 574ms (617 modules)
+ GET /competitions 200 in 892ms
+ GET /competitions 200 in 1020ms
+ GET /competitions 200 in 592ms
+ GET /competitions 200 in 175ms
+ ✓ Compiled /admin/evaluations in 445ms (600 modules)
+ GET /admin/evaluations 200 in 698ms
+ GET /competitions 200 in 224ms
+ ✓ Compiled /admin in 306ms (381 modules)
+ GET /admin 200 in 630ms
+ GET /admin/evaluations 200 in 62ms
+ GET /admin/llm-settings 200 in 60ms
+ ✓ Compiled /admin/odds-monitor in 435ms (605 modules)
+ GET /admin/odds-monitor 200 in 586ms
+ ✓ Compiled /admin/experiments in 287ms (386 modules)
+ GET /admin/experiments 200 in 485ms
+ ✓ Compiled in 468ms (384 modules)
+ ✓ Compiled in 314ms (384 modules)
+ ✓ Compiled in 116ms (221 modules)
+ ○ Compiling /matches/[id] ...
+ ✓ Compiled /matches/[id] in 1236ms (617 modules)
+ GET / 200 in 2235ms
+ GET /matches/wc2026-1 200 in 2855ms
+ ✓ Compiled in 634ms (396 modules)
+ GET /matches/wc2026-1 200 in 213ms
+ GET / 200 in 875ms
+ GET /admin 200 in 243ms
+ GET /competitions 200 in 250ms
+ GET /admin 200 in 73ms
+ ○ Compiling /api/admin/predictions/run ...
+ ✓ Compiled /api/admin/predictions/run in 712ms (625 modules)
+ GET /admin/evaluations 200 in 157ms
+ ✓ Compiled /admin/llm-settings in 324ms (407 modules)
+ GET /admin/llm-settings 200 in 526ms
+ GET /admin/llm-settings 200 in 52ms
+ GET /admin/odds-monitor 200 in 68ms
+ GET /competitions 200 in 205ms
+ POST /api/admin/predictions/run 200 in 26146ms
+ ✓ Compiled in 319ms (386 modules)
+ GET /admin 200 in 327ms
+ GET /admin/evaluations 200 in 77ms
+ ✓ Compiled /admin/llm-settings in 157ms (389 modules)
+ GET /admin/llm-settings 200 in 474ms
+ GET /admin/odds-monitor 200 in 83ms
+ GET /admin/experiments 200 in 95ms
+ ✓ Compiled in 240ms (389 modules)
+ GET /admin/evaluations 200 in 291ms
+ ✓ Compiled /api/admin/predictions/run in 317ms (409 modules)
+ POST /api/admin/predictions/run 200 in 5537ms
+ ✓ Compiled / in 358ms (411 modules)
+ GET / 200 in 1016ms
+ GET /competitions 200 in 251ms
+ GET /admin 200 in 108ms
+ ○ Compiling /api/admin/worldcup2026/sync ...
+ ✓ Compiled /api/admin/worldcup2026/sync in 550ms (634 modules)
+ POST /api/admin/worldcup2026/sync 200 in 5761ms
+ GET /admin 200 in 542ms
+ GET /competitions 200 in 238ms
+ ✓ Compiled in 803ms (607 modules)
+ GET /competitions 200 in 1397ms
+ GET /competitions 200 in 269ms
+ ✓ Compiled in 331ms (386 modules)
+ GET /competitions 200 in 339ms
+ GET /admin 200 in 190ms
+ ○ Compiling /admin/evaluations ...
+ ✓ Compiled /admin/evaluations in 655ms (388 modules)
+ GET /admin/evaluations 200 in 888ms
+ ✓ Compiled /admin/llm-settings in 367ms (391 modules)
+ GET /admin/llm-settings 200 in 522ms
+ GET /admin/odds-monitor 200 in 59ms
+ ○ Compiling /api/predictions/run-one ...
+ ✓ Compiled /api/predictions/run-one in 982ms (642 modules)
+ GET /admin/experiments 200 in 624ms
+ ✓ Compiled /api/admin/experiments/run in 488ms (644 modules)
+ POST /api/admin/experiments/run 200 in 721ms
+ GET /admin/experiments 200 in 449ms
+ GET /competitions 200 in 292ms
+ POST /api/predictions/run-one 303 in 11563ms
+ GET /?predicted=wc2026-1 200 in 652ms
+ ✓ Compiled in 424ms (423 modules)
+ GET /competitions 200 in 407ms
+ POST /api/predictions/run-one 303 in 12306ms
+ ✓ Compiled in 260ms (379 modules)
+ ✓ Compiled in 263ms (379 modules)
+ GET /competitions 200 in 280ms
+ ✓ Compiled /api/admin/login in 326ms (624 modules)
+ POST /api/admin/login 303 in 584ms
+ ✓ Compiled /api/admin/predictions/run in 212ms (409 modules)
+ GET /competitions 200 in 270ms
+ POST /api/admin/predictions/run 200 in 120011ms
+ ✓ Compiled /api/admin/experiments/run in 313ms (403 modules)
+ POST /api/admin/experiments/run 303 in 448ms
+ GET /competitions 200 in 437ms
+ ✓ Compiled /api/admin/login in 322ms (405 modules)
+ POST /api/admin/login 303 in 428ms
+ ✓ Compiled /api/admin/predictions/run in 289ms (411 modules)
+ GET /competitions 200 in 304ms
+ POST /api/admin/predictions/run 303 in 3377ms
+ POST /api/admin/experiments/run 303 in 36ms
+ ✓ Compiled /admin in 417ms (413 modules)
+ ✓ Compiled in 1ms (413 modules)
+ ✓ Compiled in 1ms (413 modules)
+ ✓ Compiled in 0ms (413 modules)
+ POST /api/admin/login 303 in 1344ms
+ GET /admin?predicted=104 200 in 1748ms
+ ✓ Compiled /api/admin/worldcup2026/sync in 1ms (413 modules)
+ ✓ Compiled (415 modules)
+ GET /admin/experiments?created=1 200 in 1345ms
+ GET /competitions 200 in 2872ms
+ GET /competitions 200 in 672ms
+ POST /api/admin/worldcup2026/sync 303 in 6021ms
+ POST /api/admin/login 303 in 29ms
+ GET /admin?predicted=104 200 in 160ms
+ GET /admin?synced=104&results=2 200 in 60ms
+ POST /api/admin/login 303 in 13ms
+ ✓ Compiled /api/admin/llm-settings in 325ms (418 modules)
+ POST /api/admin/llm-settings 303 in 428ms
+ GET /competitions 200 in 313ms
+ GET /competitions 200 in 535ms
+ GET /competitions 200 in 172ms
+ GET / 200 in 232ms
+ ✓ Compiled /api/predictions/run-one in 340ms (409 modules)
+ POST /api/predictions/run-one 303 in 642ms
+ GET / 200 in 1032ms
+ GET /?predicted=wc2026-3 200 in 933ms
+ ✓ Compiled in 448ms (379 modules)
+ GET /?predicted=wc2026-3 200 in 452ms
+ ✓ Compiled in 523ms (379 modules)
+ GET /?predicted=wc2026-3 200 in 466ms
+ ✓ Compiled in 343ms (379 modules)
+ ✓ Compiled in 262ms (379 modules)
+ GET /?predicted=wc2026-3 200 in 785ms
+ GET /?predicted=wc2026-3 200 in 302ms
+ GET / 200 in 1508ms
+[?25h
